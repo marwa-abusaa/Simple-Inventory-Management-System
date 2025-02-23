@@ -12,6 +12,7 @@ namespace Simple_Inventory_Management_System
         public void addProduct(string name, double price, int quantity)
         {
             products.Add(new Product(name, price, quantity));
+            Product.log("Product is added successfully.");
         }
 
         public bool deleteProduct(string name)
@@ -21,12 +22,24 @@ namespace Simple_Inventory_Management_System
                 if (product.Name == name)
                 {
                     products.Remove(product);
-                    product.log("Product is deleted successfully.");
+                    Product.log("Product is deleted successfully.");
                     return true;
                 }
             }
             return false;
         }
-
+        public void displayAllProducts()
+        {
+            if (products.Count == 0)
+            {
+                Product.log("No products in the inventory.");
+                return;
+            }
+            foreach (var product in products)
+            {
+                product.displayProductDetails(product);
+            }
+        }
     }
+   
 }

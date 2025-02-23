@@ -33,5 +33,9 @@ namespace Simple_Inventory_Management_System
             this.Price = price;
             this.Quantity = quantity;
         }
+        public void log(string message)
+        {
+            Console.WriteLine(message);
+        }
     }
 }

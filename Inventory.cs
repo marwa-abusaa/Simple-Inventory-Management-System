@@ -10,56 +10,56 @@ namespace Simple_Inventory_Management_System
     class Inventory
     {
         private List<Product> products = [];
-        public void addProduct(string name, double price, int quantity)
+        public void AddProduct(string name, double price, int quantity)
         {
             products.Add(new Product(name, price, quantity));
-            Product.log("Product is added successfully.");
+            Product.Log("Product is added successfully.");
         }
 
-        public void deleteProduct(string name)
+        public void DeleteProduct(string name)
         {
             foreach(var product in products)
             {
                 if (product.Name.ToLower() == name.ToLower())
                 {
                     products.Remove(product);
-                    Product.log("Product is deleted successfully.");
+                    Product.Log("Product is deleted successfully.");
                     return;
                 }
             }
-            Product.log("Product not found");
+            Product.Log("Product not found");
         }
-        public void displayAllProducts()
+        public void DisplayAllProducts()
         {
             if (products.Count == 0)
             {
-                Product.log("No products in the inventory.");
+                Product.Log("No products in the inventory.");
                 return;
             }
             foreach (var product in products)
             {
-                product.displayProductDetails(product);
+                product.DisplayProductDetails(product);
             }
         }
 
-        public void searchProduct(string name)
+        public void SearchProduct(string name)
         {
             bool isfound = false;
             foreach (var product in products)
             {
                 if (product.Name.ToLower() == name.ToLower())
                 {
-                    Product.log("Product is found.\nName\tPrice\tQuantity");
-                    product.displayProductDetails(product);
+                    Product.Log("Product is found.\nName\tPrice\tQuantity");
+                    product.DisplayProductDetails(product);
                     isfound = true;
                 }
             }
             if (!isfound)
             {
-                Product.log("Product not found");
+                Product.Log("Product not found");
             }
         }
-        public void editProduct(string name, string field, string newValue)
+        public void EditProduct(string name, string field, string newValue)
         {
             foreach (var product in products)
             {
@@ -77,10 +77,10 @@ namespace Simple_Inventory_Management_System
                             product.Quantity = int.Parse(newValue);
                             break;
                     }
-                    Product.log("Product is updates successfully.");
+                    Product.Log("Product is updates successfully.");
                 }
             }
-            Product.log("Product not found");
+            Product.Log("Product not found");
         }
     }
    

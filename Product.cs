@@ -33,14 +33,14 @@ namespace Simple_Inventory_Management_System
             this.Price = price;
             this.Quantity = quantity;
         }
-        public static void log(string message)
+        public static void Log(string message)
         {
             Console.WriteLine(message);
         }
-        public void displayProductDetails(Product p)
+        public void DisplayProductDetails(Product p)
         {
-            string product = $"{p.name}\t {p.price}\t {p.quantity}\t";
-            log(product);
+            string product = $"{p.name}\t{p.price}\t{p.quantity}\t";
+            Log(product);
         }
     }
 }

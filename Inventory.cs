@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Simple_Inventory_Management_System
 {
@@ -38,6 +39,24 @@ namespace Simple_Inventory_Management_System
             foreach (var product in products)
             {
                 product.displayProductDetails(product);
+            }
+        }
+
+        public void searchProduct(string name)
+        {
+            bool isfound = false;
+            foreach (var product in products)
+            {
+                if (product.Name.ToLower() == name.ToLower())
+                {
+                    Product.log("Product is found.\nName\tPrice\tQuantity");
+                    product.displayProductDetails(product);
+                    isfound = true;
+                }
+            }
+            if (!isfound)
+            {
+                Product.log("Product not found");
             }
         }
     }

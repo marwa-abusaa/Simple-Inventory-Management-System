@@ -68,26 +68,7 @@ namespace Simple_Inventory_Management_System
             Product.Log("Product not found");
             return null;
         }
-        //public void EditProduct(string name, string field, string newValue)
-        //{
-        //    Product product = Search(name);
-        //    if (product != null)
-        //    {
-        //        switch (field)
-        //        {
-        //            case "Name":
-        //                product.Name = newValue;
-        //                break;
-        //            case "Price":
-        //                product.Price = double.Parse(newValue);
-        //                break;
-        //            case "Quantity":
-        //                product.Quantity = int.Parse(newValue);
-        //                break;
-        //        }
-        //        Product.Log("Product is updates successfully.");
-        //    }
-        //}
+       
 
         public void EditName(string name)
         {

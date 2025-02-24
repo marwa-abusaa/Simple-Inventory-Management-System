@@ -30,6 +30,11 @@ class Program
         //add new product
         inventory.AddProduct(name, price, quantity);
     }
+    static void ViewProducts(Inventory inventory)
+    {
+        Console.WriteLine("Name\tPrice\tQuantity");
+        inventory.DisplayAllProducts();
+    }
     static void Menu()
     {
         Console.WriteLine("\n1. Add Product");
@@ -57,6 +62,7 @@ class Program
                         break;
                                       
                 case "2":
+                    ViewProducts(inventory);
                     break;
                 case "3":
                     break;
@@ -65,7 +71,7 @@ class Program
                 case "5":
                     break;
                 case "6":
-                    break;
+                    return;
                 default:
                     {
                         Console.WriteLine("Please, choose a correct number!");

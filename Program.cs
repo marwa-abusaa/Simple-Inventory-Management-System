@@ -32,8 +32,24 @@ class Program
     }
     static void ViewProducts(Inventory inventory)
     {
-        Console.WriteLine("Name\tPrice\tQuantity");
+        //view products
         inventory.DisplayAllProducts();
+    }
+    static void DeleteProduct(Inventory inventory)
+    {
+        Console.Write("Enter product name: ");
+        string name = Console.ReadLine();
+
+        //delete product
+        inventory.DeleteProduct(name);
+    }
+    static void SearchProduct(Inventory inventory)
+    {
+        Console.Write("Enter product name: ");
+        string name = Console.ReadLine();
+
+        //search product
+        inventory.SearchProduct(name);
     }
     static void Menu()
     {
@@ -67,8 +83,10 @@ class Program
                 case "3":
                     break;
                 case "4":
+                    DeleteProduct(inventory);
                     break;
                 case "5":
+                    SearchProduct(inventory);
                     break;
                 case "6":
                     return;

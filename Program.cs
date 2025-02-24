@@ -61,83 +61,50 @@ class Program
     }
 
 
-    static void EditProduct2(Inventory inventory)
+    static void EditProduct(Inventory inventory)
     {
-        Console.Write("Enter product name: ");
+        Console.Write("Enter product name you want to update: ");
         string name = Console.ReadLine();
+        Console.WriteLine("Enter new name, price, or quantity: ");
 
         if (inventory.Search(name)==null)
         {
             return;
         }
+        string newName = "";
 
-        Console.Write("What do you want to update? ");
-        EditMenu();
-        string choice = Console.ReadLine();
-        switch (choice)
+        while (true)
         {
-            case "1":
-                {
-                    while (true)
-                    {
-                        Console.Write("Enter new name: ");
-                        string newName = Console.ReadLine();
-                        if (newName != string.Empty)
-                        {
-                            inventory.EditName(newName);
-                            break;
-                        }
-                        Console.WriteLine("Please enter the name of product:");
-                    }
-                    break;
-                }
-
-            case "2":
-                {
-                    double newPrice;
-                    while (true)
-                    {
-                        Console.Write("Enter new price: ");
-                        if (double.TryParse(Console.ReadLine(), out newPrice) && newPrice >= 0)
-                        {
-                            inventory.EditPrice(name, newPrice);
-                            break;
-                        }
-                        Console.WriteLine("Invalid input! Please enter a number:");
-                    }
-                    break;
-                }
-            case "3":
-                {
-                    int newQuantity;
-                    while (true)
-                    {
-                        Console.Write("Enter new quantity: ");
-                        if (int.TryParse(Console.ReadLine(), out newQuantity) && newQuantity >= 0)
-                        {
-                            inventory.EditQuantity(name, newQuantity);
-                            break;
-                        }
-                        Console.WriteLine("Invalid input! Please enter a number:");
-                    }
-                    break;
-                }
-            default:
-                {
-                    Console.WriteLine("Please, choose a valid number!");
-                    break;
-                }               
-               
+            Console.Write("Enter product name: ");
+            newName = Console.ReadLine();
+            if (newName != string.Empty)
+                break;
+            Console.WriteLine("Please enter the name of product.");
         }
 
+        double newPrice;
+        while (true)
+        {
+            Console.Write("Enter product price: ");
+            if (double.TryParse(Console.ReadLine(), out newPrice) && newPrice >= 0)
+                break;
+            Console.WriteLine("Invalid input! Please enter a number.");
+        }
+
+        int newQuantity;
+        while (true)
+        {
+            Console.Write("Enter product quantity: ");
+            if (int.TryParse(Console.ReadLine(), out newQuantity) && newQuantity >= 0)
+                break;
+            Console.WriteLine("Invalid input! Please enter a number.");
+        }
+
+        //edit product
+        inventory.EditProduct(name, newPrice, newQuantity, newName);
+
     }
-    static void EditMenu()
-    {
-        Console.WriteLine("\n1. Product Name");
-        Console.WriteLine("2. Product Price");
-        Console.WriteLine("3. Product Quantity");
-        Console.Write("Choose an option: ");
-    }
+   
     static void Menu()
     {
         Console.WriteLine("\n1. Add Product");
@@ -167,7 +134,7 @@ class Program
                     ViewProducts(inventory);
                     break;
                 case "3":
-                    EditProduct2(inventory);
+                    EditProduct(inventory);
                     break;
                 case "4":
                     DeleteProduct(inventory);

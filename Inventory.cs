@@ -39,9 +39,9 @@ namespace Simple_Inventory_Management_System
                 Product.Log("No products in the inventory.");
                 return;
             }
+            Product.Log("Name\tPrice\tQuantity");
             foreach (var product in products)
-            {
-                Product.Log("Name\tPrice\tQuantity");
+            {               
                 product.DisplayProductDetails(product);
             }
         }
@@ -70,30 +70,14 @@ namespace Simple_Inventory_Management_System
         }
        
 
-        public void EditName(string name)
+        public void EditProduct(string name, double newPrice, int newQuantity, string newName)
         {
             Product product = Search(name);
             if (product != null)
             {
-                product.Name = name;
-                Product.Log("Product is updates successfully.");
-            }
-        }
-        public void EditPrice(string name,double price)
-        {
-            Product product = Search(name);
-            if (product != null)
-            {
-                product.Price = price;
-                Product.Log("Product is updates successfully.");
-            }
-        }
-        public void EditQuantity(string name, int quantity)
-        {
-            Product product = Search(name);
-            if (product != null)
-            {
-                product.Quantity = quantity;
+                product.Name = newName;
+                product.Price = newPrice;
+                product.Quantity = newQuantity;
                 Product.Log("Product is updates successfully.");
             }
         }

@@ -18,16 +18,19 @@ namespace Simple_Inventory_Management_System
 
         public void DeleteProduct(string name)
         {
-            foreach(var product in products)
+            if (products.Count == 0)
             {
-                if (product.Name.ToLower() == name.ToLower())
-                {
-                    products.Remove(product);
-                    Product.Log("Product is deleted successfully.");
-                    return;
-                }
+                Product.Log("No products in the inventory.");
+                return;
             }
-            Product.Log("Product not found");
+            Product product = Search(name);
+            if (product != null)
+            {
+                products.Remove(product);
+                Product.Log("Product is deleted successfully.");
+                return;
+            }
+            
         }
         public void DisplayAllProducts()
         {
@@ -38,49 +41,80 @@ namespace Simple_Inventory_Management_System
             }
             foreach (var product in products)
             {
+                Product.Log("Name\tPrice\tQuantity");
                 product.DisplayProductDetails(product);
             }
         }
 
         public void SearchProduct(string name)
         {
-            bool isfound = false;
-            foreach (var product in products)
+            Product product = Search(name);
+            if (product != null)
             {
-                if (product.Name.ToLower() == name.ToLower())
-                {
-                    Product.Log("Product is found.\nName\tPrice\tQuantity");
-                    product.DisplayProductDetails(product);
-                    isfound = true;
-                }
-            }
-            if (!isfound)
-            {
-                Product.Log("Product not found");
-            }
+                Product.Log("Product is found.\nName\tPrice\tQuantity");
+                product.DisplayProductDetails(product);
+            }          
         }
-        public void EditProduct(string name, string field, string newValue)
+
+        public Product Search(string name)
         {
             foreach (var product in products)
             {
                 if (product.Name.ToLower() == name.ToLower())
                 {
-                    switch (field)
-                    {
-                        case "Name":
-                            product.Name = newValue;
-                            break;
-                        case "Price":
-                            product.Price = double.Parse(newValue);
-                            break;
-                        case "Quantity":
-                            product.Quantity = int.Parse(newValue);
-                            break;
-                    }
-                    Product.Log("Product is updates successfully.");
+                    return product;
                 }
             }
             Product.Log("Product not found");
+            return null;
+        }
+        //public void EditProduct(string name, string field, string newValue)
+        //{
+        //    Product product = Search(name);
+        //    if (product != null)
+        //    {
+        //        switch (field)
+        //        {
+        //            case "Name":
+        //                product.Name = newValue;
+        //                break;
+        //            case "Price":
+        //                product.Price = double.Parse(newValue);
+        //                break;
+        //            case "Quantity":
+        //                product.Quantity = int.Parse(newValue);
+        //                break;
+        //        }
+        //        Product.Log("Product is updates successfully.");
+        //    }
+        //}
+
+        public void EditName(string name)
+        {
+            Product product = Search(name);
+            if (product != null)
+            {
+                product.Name = name;
+                Product.Log("Product is updates successfully.");
+            }
+        }
+        public void EditPrice(string name,double price)
+        {
+            Product product = Search(name);
+            if (product != null)
+            {
+                product.Price = price;
+                Product.Log("Product is updates successfully.");
+            }
+        }
+        public void EditQuantity(string name, int quantity)
+        {
+            Product product = Search(name);
+            if (product != null)
+            {
+                product.Quantity = quantity;
+                Product.Log("Product is updates successfully.");
+            }
         }
     }
    

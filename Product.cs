@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Simple_Inventory_Management_System
 {
     class Product
@@ -11,7 +12,6 @@ namespace Simple_Inventory_Management_System
         private string name;
         private double price;
         private int quantity;
-
         public string Name
         {
             get { return name; }

@@ -97,6 +97,5 @@ namespace Simple_Inventory_Management_System
                 Product.Log("Product is updates successfully.");
             }
         }
-    }
-   
+    }//class
 }

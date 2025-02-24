@@ -59,43 +59,7 @@ class Program
         //search product
         inventory.SearchProduct(name);
     }
-    //static void EditProduct(Inventory inventory)
-    //{
-    //    Console.Write("Enter product name: ");
-    //    string name = Console.ReadLine();
 
-    //    Console.Write("What do you want to update? ");
-    //    EditMenu();
-    //    string choice = Console.ReadLine();
-    //    string field="";
-    //    switch (choice)
-    //    {
-    //        case "1":
-    //            {
-    //                field = "Name";
-    //                Console.Write("Enter new name: ");
-    //                break;
-    //            }
-                
-    //        case "2":
-    //            {
-    //                field = "Price";
-    //                Console.Write("Enter new price: ");
-    //                break;
-    //            }
-    //        case "3":
-    //            {
-    //                field = "Quantity";
-    //                Console.Write("Enter new quantity: ");
-    //                break;
-    //            }
-    //    }
-
-    //    string newValue = Console.ReadLine();
-    //    //edit product
-    //    inventory.EditProduct(name, field, newValue);
-
-    //}
 
     static void EditProduct2(Inventory inventory)
     {

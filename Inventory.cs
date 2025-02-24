@@ -16,18 +16,18 @@ namespace Simple_Inventory_Management_System
             Product.log("Product is added successfully.");
         }
 
-        public bool deleteProduct(string name)
+        public void deleteProduct(string name)
         {
             foreach(var product in products)
             {
-                if (product.Name == name)
+                if (product.Name.ToLower() == name.ToLower())
                 {
                     products.Remove(product);
                     Product.log("Product is deleted successfully.");
-                    return true;
+                    return;
                 }
             }
-            return false;
+            Product.log("Product not found");
         }
         public void displayAllProducts()
         {
@@ -58,6 +58,29 @@ namespace Simple_Inventory_Management_System
             {
                 Product.log("Product not found");
             }
+        }
+        public void editProduct(string name, string field, string newValue)
+        {
+            foreach (var product in products)
+            {
+                if (product.Name.ToLower() == name.ToLower())
+                {
+                    switch (field)
+                    {
+                        case "Name":
+                            product.Name = newValue;
+                            break;
+                        case "Price":
+                            product.Price = double.Parse(newValue);
+                            break;
+                        case "Quantity":
+                            product.Quantity = int.Parse(newValue);
+                            break;
+                    }
+                    Product.log("Product is updates successfully.");
+                }
+            }
+            Product.log("Product not found");
         }
     }
    

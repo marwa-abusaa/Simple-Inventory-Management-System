@@ -12,21 +12,9 @@ namespace Simple_Inventory_Management_System
         private string name;
         private double price;
         private int quantity;
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-        public double Price
-        {
-            get { return price; }
-            set { price = value; }
-        }
-        public int Quantity
-        {
-            get { return quantity; }
-            set { quantity = value; }
-        }
+        public string Name { get; set; }
+        public double Price { get; set; }
+        public int Quantity { get; set; }
         public Product(string name, double price, int quantity)
         {
             this.Name = name;

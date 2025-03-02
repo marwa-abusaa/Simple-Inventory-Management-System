@@ -1,5 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
-//main 
+
 using Simple_Inventory_Management_System;
 
 class Program
@@ -35,12 +35,12 @@ class Program
             Console.WriteLine("Invalid input! Please enter a number.");
         }
 
-        //add new product
+        
         inventory.AddProduct(name, price, quantity);
     }
     static void ViewProducts(Inventory inventory)
     {
-        //view products
+        
         inventory.DisplayAllProducts();
     }
     static void DeleteProduct(Inventory inventory)
@@ -48,7 +48,7 @@ class Program
         Console.Write("Enter product name: ");
         string name = Console.ReadLine();
 
-        //delete product
+        
         inventory.DeleteProduct(name);
     }
     static void SearchProduct(Inventory inventory)
@@ -56,7 +56,7 @@ class Program
         Console.Write("Enter product name: ");
         string name = Console.ReadLine();
 
-        //search product
+        
         inventory.SearchProduct(name);
     }
 
@@ -100,7 +100,7 @@ class Program
             Console.WriteLine("Invalid input! Please enter a number.");
         }
 
-        //edit product
+        
         inventory.EditProduct(name, newPrice, newQuantity, newName);
 
     }

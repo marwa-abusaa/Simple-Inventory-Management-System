@@ -1,47 +1,42 @@
 ﻿using Simple_Inventory_Management_System.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Simple_Inventory_Management_System.Services
 {
-    class InventoryService
+    public class InventoryService
     {
-        private Inventory _inventory;
-        public Inventory InventoryProp => _inventory;
+        public Inventory InventoryProp;
 
         public InventoryService()
         {
-            _inventory = new Inventory();
+            InventoryProp = new Inventory();
         }
         public void AddProduct(string name, double price, int quantity)
         {
-            _inventory.Products.Add(new Product(name, price, quantity));
+            InventoryProp.Products.Add(new Product(name, price, quantity));
         }
 
         public bool DeleteProduct(string name)
         {
-            if (_inventory.Products.Count == 0)
+            if (InventoryProp.Products.Count == 0)
             {               
                 return false;
             }
             Product? product = Search(name);
             if (product != null)
             {
-                _inventory.Products.Remove(product);
+                InventoryProp.Products.Remove(product);
                 return true;
             }
             return false;
         }
         public void DisplayAllProducts()
         {
-            if (_inventory.Products.Count == 0)
+            if (InventoryProp.Products.Count == 0)
             {
                 return;
             }          
-            foreach (var product in _inventory.Products)
+            foreach (var product in InventoryProp.Products)
             {
                 ProductService.DisplayProductDetails(product);
             }
@@ -58,9 +53,9 @@ namespace Simple_Inventory_Management_System.Services
 
         public Product? Search(string name)
         {
-            foreach (var product in _inventory.Products)
+            foreach (var product in InventoryProp.Products)
             {
-                if (product.Name.ToLower() == name.ToLower())
+                if (string.Equals(product.Name, name, StringComparison.OrdinalIgnoreCase))
                 {
                     return product;
                 }

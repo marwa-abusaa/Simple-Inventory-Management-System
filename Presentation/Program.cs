@@ -1,6 +1,6 @@
 ﻿using Simple_Inventory_Management_System.Services;
 
-internal class Program
+public class Program
 {
     public static void AddNewProduct(InventoryService inventory)
     {

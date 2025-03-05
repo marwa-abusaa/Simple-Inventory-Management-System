@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
+﻿
 namespace Simple_Inventory_Management_System.Domain
 {
-    class Product
-    {
-        private string name;
-        private double price;
-        private int quantity;
+    public class Product
+    {      
         public string Name { get; set; }
         public double Price { get; set; }
         public int Quantity { get; set; }
+
         public Product(string name, double price, int quantity)
         {
             Name = name;

@@ -122,4 +122,28 @@ public class InventoryService
         return false;
     }
 
+    public void EditProduct(string name, double newPrice, int newQuantity, string newName)
+    {
+        Product? product = Search(name);
+        if (product != null)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "UPDATE Products SET Name = @NewName, Price = @NewPrice, Quantity = @NewQuantity WHERE Name = @OldName";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@NewName", newName);
+                    command.Parameters.AddWithValue("@NewPrice", newPrice);
+                    command.Parameters.AddWithValue("@NewQuantity", newQuantity);
+                    command.Parameters.AddWithValue("@OldName", name);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+    }
+
 }

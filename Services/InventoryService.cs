@@ -29,4 +29,35 @@ public class InventoryService
         }
     }
 
+    public Product? Search(string name)
+    {
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+
+            string query = "SELECT * FROM Products WHERE Name = @Name";
+
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@Name", name);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        Product product = new Product
+                        (
+                            reader["Name"].ToString()!,
+                            Convert.ToDouble(reader["Price"]),
+                            Convert.ToInt32(reader["Quantity"])
+                        );
+
+                        return product;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
 }

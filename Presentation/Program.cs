@@ -1,4 +1,5 @@
-﻿using Simple_Inventory_Management_System.Services;
+﻿using Simple_Inventory_Management_System.Domain;
+using Simple_Inventory_Management_System.Services;
 
 public class Program
 {
@@ -38,12 +39,15 @@ public class Program
         Console.WriteLine("Product is added successfully.");
     }
     public static void ViewProducts(InventoryService inventory)
-    {
-        if (inventory.InventoryProp.Products.Any())
+    {        
+        List<Product> products = inventory.DisplayAllProducts();
+        if (products.Any())
         {
             Console.WriteLine("Name\tPrice\tQuantity");
-            inventory.DisplayAllProducts();
-        }           
+
+            foreach (var product in products)
+            ProductService.DisplayProductDetails(product);
+        }
         else
             Console.WriteLine("No products in the inventory.");
 

@@ -60,4 +60,13 @@ public class InventoryService
         return null;
     }
 
+    public void SearchProduct(string name)
+    {
+        Product? product = Search(name);
+        if (product != null)
+        {
+            ProductService.DisplayProductDetails(product);
+        }
+    }
+
 }

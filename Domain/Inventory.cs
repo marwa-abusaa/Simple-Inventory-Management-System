@@ -1,8 +1,8 @@
-﻿
-namespace Simple_Inventory_Management_System.Domain
+﻿using Simple_Inventory_Management_System.Infrastructure;
+
+namespace Simple_Inventory_Management_System.Domain;
+
+public class Inventory
 {
-    public class Inventory
-{
-    public List<Product> Products { get; set; } = new List<Product>();
-}
+    private string connectionString = DataBaseConnection.connectionString;
 }

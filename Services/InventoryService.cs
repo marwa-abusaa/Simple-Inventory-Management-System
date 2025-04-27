@@ -100,4 +100,26 @@ public class InventoryService
         return products;
     }
 
+    public bool DeleteProduct(string name)
+    {
+        Product? product = Search(name);
+        if (product != null)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "DELETE FROM Products WHERE Name = @Name";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Name", name);
+                    command.ExecuteNonQuery();
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
 }

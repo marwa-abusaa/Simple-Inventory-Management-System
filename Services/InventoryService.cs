@@ -1,79 +1,32 @@
-﻿using Simple_Inventory_Management_System.Domain;
+﻿using Microsoft.Data.SqlClient;
+using Simple_Inventory_Management_System.Domain;
+using Simple_Inventory_Management_System.Infrastructure;
 
 
-namespace Simple_Inventory_Management_System.Services
+namespace Simple_Inventory_Management_System.Services;
+
+public class InventoryService
 {
-    public class InventoryService
+    private string connectionString = DataBaseConnection.connectionString;
+
+    
+    public void AddProduct(string name, double price, int quantity)
     {
-        public Inventory InventoryProp;
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
 
-        public InventoryService()
-        {
-            InventoryProp = new Inventory();
-        }
-        public void AddProduct(string name, double price, int quantity)
-        {
-            InventoryProp.Products.Add(new Product(name, price, quantity));
-        }
+            string query = "INSERT INTO Products (Name, Price, Quantity) VALUES (@Name, @Price, @Quantity)";
 
-        public bool DeleteProduct(string name)
-        {
-            if (InventoryProp.Products.Count == 0)
-            {               
-                return false;
-            }
-            Product? product = Search(name);
-            if (product != null)
+            using (SqlCommand command = new SqlCommand(query, connection))
             {
-                InventoryProp.Products.Remove(product);
-                return true;
-            }
-            return false;
-        }
-        public void DisplayAllProducts()
-        {
-            if (InventoryProp.Products.Count == 0)
-            {
-                return;
-            }          
-            foreach (var product in InventoryProp.Products)
-            {
-                ProductService.DisplayProductDetails(product);
+                command.Parameters.AddWithValue("@Name", name);
+                command.Parameters.AddWithValue("@Price", price);
+                command.Parameters.AddWithValue("@Quantity", quantity);
+
+                command.ExecuteNonQuery();
             }
         }
-
-        public void SearchProduct(string name)
-        {
-            Product? product = Search(name);
-            if (product != null)
-            {
-                ProductService.DisplayProductDetails(product);
-            }
-        }
-
-        public Product? Search(string name)
-        {
-            foreach (var product in InventoryProp.Products)
-            {
-                if (string.Equals(product.Name, name, StringComparison.OrdinalIgnoreCase))
-                {
-                    return product;
-                }
-            }
-            return null;
-        }
-
-
-        public void EditProduct(string name, double newPrice, int newQuantity, string newName)
-        {
-            Product? product = Search(name);
-            if (product != null)
-            {
-                product.Name = newName;
-                product.Price = newPrice;
-                product.Quantity = newQuantity;
-            }
-        }
-
     }
+
 }

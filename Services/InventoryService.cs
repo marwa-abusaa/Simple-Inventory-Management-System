@@ -69,4 +69,35 @@ public class InventoryService
         }
     }
 
+    public List<Product> DisplayAllProducts()
+    {
+        List<Product> products = new List<Product>();
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+
+            string query = "SELECT * FROM Products";
+
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Product product = new Product
+                        (
+                            reader["Name"].ToString()!,
+                            Convert.ToDouble(reader["Price"]),
+                            Convert.ToInt32(reader["Quantity"])
+                        );
+
+                        products.Add(product);
+                    }
+                }
+            }
+        }
+        return products;
+    }
+
 }

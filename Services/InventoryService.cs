@@ -1,79 +1,42 @@
 ﻿using Simple_Inventory_Management_System.Domain;
+using Simple_Inventory_Management_System.Infrastructure;
 
 
-namespace Simple_Inventory_Management_System.Services
+namespace Simple_Inventory_Management_System.Services;
+
+public class InventoryService
 {
-    public class InventoryService
+    private readonly ProductRepository repository = new ProductRepository();
+
+
+    public void AddProduct(string name, double price, int quantity)
     {
-        public Inventory InventoryProp;
-
-        public InventoryService()
-        {
-            InventoryProp = new Inventory();
-        }
-        public void AddProduct(string name, double price, int quantity)
-        {
-            InventoryProp.Products.Add(new Product(name, price, quantity));
-        }
-
-        public bool DeleteProduct(string name)
-        {
-            if (InventoryProp.Products.Count == 0)
-            {               
-                return false;
-            }
-            Product? product = Search(name);
-            if (product != null)
-            {
-                InventoryProp.Products.Remove(product);
-                return true;
-            }
-            return false;
-        }
-        public void DisplayAllProducts()
-        {
-            if (InventoryProp.Products.Count == 0)
-            {
-                return;
-            }          
-            foreach (var product in InventoryProp.Products)
-            {
-                ProductService.DisplayProductDetails(product);
-            }
-        }
-
-        public void SearchProduct(string name)
-        {
-            Product? product = Search(name);
-            if (product != null)
-            {
-                ProductService.DisplayProductDetails(product);
-            }
-        }
-
-        public Product? Search(string name)
-        {
-            foreach (var product in InventoryProp.Products)
-            {
-                if (string.Equals(product.Name, name, StringComparison.OrdinalIgnoreCase))
-                {
-                    return product;
-                }
-            }
-            return null;
-        }
-
-
-        public void EditProduct(string name, double newPrice, int newQuantity, string newName)
-        {
-            Product? product = Search(name);
-            if (product != null)
-            {
-                product.Name = newName;
-                product.Price = newPrice;
-                product.Quantity = newQuantity;
-            }
-        }
-
+        repository.AddProduct(name, price, quantity);
     }
+
+    public Product? Search(string name)
+    {
+        return repository.Search(name);
+    }
+
+    public void SearchProduct(string name)
+    {
+        repository.SearchProduct(name);
+    }
+
+    public List<Product> DisplayAllProducts()
+    {
+        return repository.DisplayAllProducts();
+    }
+
+    public bool DeleteProduct(string name)
+    {
+        return repository.DeleteProduct(name);
+    }
+
+    public void EditProduct(string name, double newPrice, int newQuantity, string newName)
+    {
+        repository.EditProduct(name, newPrice, newQuantity, newName);
+    }
+
 }

@@ -7,7 +7,7 @@ namespace Simple_Inventory_Management_System.Services;
 
 public class InventoryService
 {
-    private string connectionString = DataBaseConnection.connectionString;
+    private string connectionString = DataBaseConnection.ConnectionString;
 
     
     public void AddProduct(string name, double price, int quantity)
